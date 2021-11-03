@@ -1,1 +1,0 @@
-{"version":3,"sources":["views/HomeView/HomeView.js"],"names":["HomeView"],"mappings":"kKAMeA,UANE,WAEf,OACE","file":"static/js/6.624807f7.chunk.js","sourcesContent":["const HomeView = () => {\r\n\r\n  return (\r\n    <h1>Home</h1>\r\n  )\r\n}\r\nexport default HomeView;"],"sourceRoot":""}
