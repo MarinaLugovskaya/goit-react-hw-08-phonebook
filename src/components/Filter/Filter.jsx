@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import changeFilter from '../../redux/contacts/contacts-actions';
 import { getFilter } from '../../redux/contacts/contacts-selectors';
-import { filter } from '../../redux/contacts/filter-slice';
-import css from '../../components/Filter/Filter.module.css';
+import css from '../Filter/Filter.module.css';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
 
 const Filter = () => {
   const value = useSelector(getFilter);
@@ -10,16 +14,26 @@ const Filter = () => {
 
   return (
     <>
-      <label className={css.text}>
-        Find contacts by name
-        <input
-          className={css.input}
-          type="text"
-          name="filter"
-          value={value}
-          onChange={evt => dispatch(filter(evt.target.value))}
-        />
-      </label>
+      <Box
+        className={css.filter}
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1 },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <FormControl variant="standard">
+          <InputLabel htmlFor="component-simple">Find contacts by name</InputLabel>
+          <Input
+            id="component-simple"
+            type="text"
+            name="filter"
+            value={value}
+            onChange={evt => dispatch(changeFilter(evt.target.value))}
+          />
+        </FormControl>
+      </Box>
     </>
   );
 };
@@ -27,6 +41,6 @@ const Filter = () => {
 export default Filter;
 
 Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

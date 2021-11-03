@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo');
+.topMenu {
+  position: relative;
+  background: rgba(233, 16, 16, 0.2);
+}
+.topMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+
+}
+
+.topMenu a {
+  text-decoration: none;
+  line-height: 80px;
+  padding: 0 20px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-family: 'Arimo', sans-serif;
+  font-weight: bold;
+  color: rgb(68, 63, 63);
+  transition: .3s linear;
+}
+.topMenu a:hover {background: rgba(0,0,0,.3);}
+@media (max-width: 830px) {
+.topMenu {
+  padding-top: 90px;
+  text-align: center;
+}
+
+.topMenu {
+  float: none;
+}
+.topMenu a {
+  line-height: normal;
+  padding: 20px 15px;
+  font-size: 16px;
+}
+}
+@media (max-width: 630px) {
+.menu-main li {display: block;}
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 15px;
+  font-weight: 500;
+  font-size: 35px;
+  color: black;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.activeLink {
+  composes: link;
+  color: rgb(85, 32, 136);
+}
+
+.navigation {
+  text-align: center;
+}

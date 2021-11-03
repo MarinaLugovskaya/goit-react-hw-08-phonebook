@@ -1,22 +1,3 @@
-// import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-// import logger from 'redux-logger';
-// import {contactsApi} from './contacts/contacts-slice';
-// import filter from '../redux/contacts/filter-slice';
-
-// const middleware = [...getDefaultMiddleware(), logger];
-
-// const store = configureStore({
-//   reducer: {
-//     [contactsApi.reducerPath]: contactsApi.reducer, 
-//     filter,
-//   },
-//   middleware: getDefaultMiddleware => [
-//     ...getDefaultMiddleware(),
-//     contactsApi.middleware,
-//   ],
-// });
-
-// export default store;
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -29,10 +10,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { authReducer } from './auth';
+import contactsReducer from './contacts/contacts-reducer';
 import logger from 'redux-logger';
-import { contactsApi } from './contacts/contacts-slice';
-import filter from '../redux/contacts/filter-slice';
+import { authReducer } from './auth';
 
 const middleware = [...getDefaultMiddleware(), logger];
 
@@ -42,16 +22,14 @@ const authPersistConfig = {
   whitelist: ['token'],
 };
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    [contactsApi.reducerPath]: contactsApi.reducer, 
-    filter,
+    contacts: contactsReducer,
   },
-  middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware(),
-    contactsApi.middleware,
-  ],
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
 });
+
 export default store;
 export const persistor = persistStore(store);

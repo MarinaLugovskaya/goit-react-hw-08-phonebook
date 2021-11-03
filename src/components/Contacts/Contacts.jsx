@@ -1,36 +1,45 @@
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-// import { getVisibleContacts } from "../../redux/contacts/contacts-selectors";
-import { getFilter } from '../../redux/contacts/contacts-selectors';
-import { useFetchContactsQuery } from '../../redux/contacts/contacts-slice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts, deleteContacts } from '../../redux/contacts/contacts-operations';
+import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
 import css from '../Contacts/Contacts.module.css';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-const Contacts = ({ onDelete, deleting }) => {
-  const { data: Contacts } = useFetchContactsQuery();
-  const filterValue = useSelector(state => getFilter(state));
-  const contactsFilter = Contacts?.filter(contact =>
-    contact.name.toLowerCase().includes(filterValue.toLowerCase()),
-  );
-  // const dispatch = useDispatch();
-  // const contacts = useSelector(getVisibleContacts);
+const Contacts = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getVisibleContacts);
 
-  // const onClick = (id) => dispatch(contactsActions.deleteContacts(id));
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const onClick = id => dispatch(deleteContacts(id));
 
   return (
     <>
       <h2 className={css.title}>Contacts</h2>
       <ul>
-        {Contacts &&
-          contactsFilter.map(contact => (
-            <li className={css.item} key={contact.id}>
-              <p className={css.text}>
-                {contact.name}: {contact.number}
-              </p>
-              <button className={css.button} onClick={() => onDelete(contact.id)} type="button">
-                {deleting ? 'Deleting...' : 'Delete'}
-              </button>
-            </li>
-          ))}
+        {contacts.map(contact => (
+          <li className={css.item} key={contacts.id}>
+            <p className={css.text}>
+              {contact.name}: {contact.number}
+            </p>
+
+            <Stack direction="row" spacing={1}>
+              <Button
+                variant="outlined"
+                color="error"
+                className={css.button}
+                onClick={() => onClick(contact.id)}
+                type="button"
+              >
+                Delete
+              </Button>
+            </Stack>
+          </li>
+        ))}
       </ul>
     </>
   );

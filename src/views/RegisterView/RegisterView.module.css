@@ -6,13 +6,11 @@
 }
 
 .formContainer {
-  display: flex;
+  display: block;
   list-style: none;
-  justify-content: center;
 }
 .item {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
-
