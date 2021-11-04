@@ -53,7 +53,7 @@ export const LoginView = () => {
           <li className={css.item}>
             <TextField
               id="filled-password-input"
-              label="Name"
+              label="Email"
               autoComplete="current-password"
               variant="filled"
               type="email"
@@ -67,7 +67,7 @@ export const LoginView = () => {
           <li className={css.item}>
             <TextField
               id="filled-password-input"
-              label="Email"
+              label="Password"
               autoComplete="current-password"
               variant="filled"
               type="password"

@@ -54,24 +54,12 @@ export default function Form() {
 
   return (
     <>
-      <Box
-        onSubmit={handleSubmit}
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <h1 className={css.title}>Phonebook</h1>
-
-        <ul className={css.formContainer}>
-          <li className={css.item}>
-            <TextField
-              id="filled-password-input"
-              label="Name"
-              autoComplete="current-password"
-              variant="filled"
+      <section className={css.container}>
+        <div className={css.login}>
+          <h1 className={css.title}>Phonebook</h1>
+          <form onSubmit={handleSubmit} className={css.signin}>
+            <input
+              className={css.signinInput}
               type="text"
               name="name"
               value={name}
@@ -81,13 +69,9 @@ export default function Form() {
               required
               placeholder="name"
             />
-          </li>
-          <li className={css.item}>
-            <TextField
-              id="filled-password-input"
-              label="Number"
-              autoComplete="current-password"
-              variant="filled"
+
+            <input
+              className={css.signinInput}
               type="tel"
               name="number"
               value={number}
@@ -97,14 +81,13 @@ export default function Form() {
               required
               placeholder="number"
             />
-          </li>
-          <li className={css.item}>
-            <Button variant="outlined" type="submit">
+
+            <button className={css.submit} type="submit" name="commit" value="Login">
               Add contact
-            </Button>
-          </li>
-        </ul>
-      </Box>
+            </button>
+          </form>
+        </div>
+      </section>
     </>
   );
 }
